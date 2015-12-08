@@ -2,10 +2,12 @@
 <html>
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Hello React!</title>
     <script src="react.js"></script>
     <script src="react-dom.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
   </head>
   <body>
     <div id="cat"></div>
@@ -18,8 +20,9 @@
       	render: function(){
       		return(
       			<div>
+              <h1><i class="fa-instagram"></i>写下你想对我说的话吧</h1>
       				<p>	you are saying: {this.state.name} </p>
-					<input type='text' onChange={this.updateName} />
+					<input type='textarea' onChange={this.updateName} />
       			</div>
       			);
       	},
