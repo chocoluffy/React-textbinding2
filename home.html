@@ -14,25 +14,63 @@
       src: url(https://hxgdzyuyi.github.io/temp/mfyuehei-temp.woff) format("woff"), url(https://hxgdzyuyi.github.io/temp/mfyuehei-temp.ttf) format("truetype");
       }
       body {
-        background-color: #F2EFE9;
+        /*background-color: #F2EFE9;*/
+        background: url(dark.jpg) no-repeat center fixed;
+        background-size: cover;
         overflow: hidden;
         padding-top: 40px;
         font-family: mfyuehei;
         font-size: 1em;
+        color: white;
       }
-      .main {
+      .maincontent {
+        margin-left: 10%;
+        margin-right: 65%;
+      }
+      .maindisplay {
+        margin-top: 15px;
         font-size: 0.6em;
       }
+
+      .form {
+        opacity: 1;
+      }
+
+      #hiddenInput {
+        opacity: 1;
+        outline: none;
+        margin-bottom: 10px;
+        border-top: none;
+        border-right: none;
+        border-left: none;
+        color: white;
+        background: black;
+        font-size: 15px;
+        line-height: 1px;
+        padding: 1px;
+        height: 32px;
+        -webkit-appearance: none;
+      }
+
+
      </style>
   </head>
   <body>
     <div id="cat"></div>
     <script type="text/babel">
 
-      var Mail = "我希望， 每一个时刻， 都象彩色蜡笔那样美丽。 我希望，能在心爱的白纸上画画， 画出笨拙的自由， 画下一只永远不会， 流泪的眼睛。 一片天空， 一片属于天空的羽毛和树叶， 一个淡绿的夜晚和苹果。 我想画下早晨， 画下露水， 所能看见的微笑。 画下所有最年轻的， 没有痛苦的爱情。"
+      var Mail = "是不是很酷炫💣今天花了一个下午的时间写了这个网站。前几天接触到一个新技术， 今天想来试试手， 碰巧最近大家都准备final嘛， 我也来祝福大家考试顺利咯！！！最近tracy和cici一定又熬夜了😪一定要多吃水果， 多补补觉啊， 还有祝所有的各位sunny, yehan， april, toniee, chris, 包米等女神们， 还有arie男神， xth守卫， 学霸都科科完美收官咯😊~~还有最近很感激xth一直以来帮大家买饭呀!!我待会一定开始复习了!😂， 最后附上一句挺喜欢的话：As within, so without. 赞一赞sunny这个贤惠的小盆友。我今晚没和你说的那几个东西叫： ember和backbone. 各位晚安~~🌛"
+
+      var accu = 0;
+      var prev = 0;
 
       var updateMail = function(index){
-          return Mail.slice(0, index);
+          if(index - prev > 0){
+              accu = accu + index - prev;
+          }
+
+          prev = index;
+          return Mail.slice(0, accu);
       }
 
       var Cat = React.createClass({
@@ -42,11 +80,13 @@
 
       	render: function(){
       		return (
-      			<div>
+      			<div className="maincontent">
               <h1><i className="fa fa-quote-left"></i>在一个小小的角落:</h1>
       				<p>	你想对我说 </p>
-					<input type='textarea' onChange={this.updateName} />
-              <div className="main">
+              <div className="form">
+					     <input type='text' id="hiddenInput" onChange={this.updateName} />
+              </div>
+              <div className="maindisplay">
               <h2> {this.state.name} </h2>
               </div>
       			</div>
