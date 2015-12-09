@@ -8,33 +8,76 @@
     <script src="react-dom.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+     <style>
+      @font-face {
+      font-family: mfyuehei;
+      src: url(http://hxgdzyuyi.github.io/temp/mfyuehei-temp.woff) format("woff"), url(http://hxgdzyuyi.github.io/temp/mfyuehei-temp.ttf) format("truetype");
+      }
+      body {
+        background-color: #F2EFE9;
+        overflow: hidden;
+        padding-top: 40px;
+        font-family: mfyuehei;
+        font-size: 1em;
+      }
+      .main {
+        font-size: 0.6em;
+      }
+     </style>
   </head>
   <body>
     <div id="cat"></div>
     <script type="text/babel">
+
+      var Mail = "我希望， 每一个时刻， 都象彩色蜡笔那样美丽。 我希望，能在心爱的白纸上画画， 画出笨拙的自由， 画下一只永远不会， 流泪的眼睛。 一片天空， 一片属于天空的羽毛和树叶， 一个淡绿的夜晚和苹果。 我想画下早晨， 画下露水， 所能看见的微笑。 画下所有最年轻的， 没有痛苦的爱情。"
+
+      var updateMail = function(index){
+          return Mail.slice(0, index);
+      }
+
       var Cat = React.createClass({
       	getInitialState: function(){
       		return {name: null}
       	}, 
 
       	render: function(){
-      		return(
+      		return (
       			<div>
-              <h1><i class="fa-instagram"></i>写下你想对我说的话吧</h1>
-      				<p>	you are saying: {this.state.name} </p>
+              <h1><i className="fa fa-quote-left"></i>在一个小小的角落:</h1>
+      				<p>	你想对我说 </p>
 					<input type='textarea' onChange={this.updateName} />
+              <div className="main">
+              <h2> {this.state.name} </h2>
+              </div>
       			</div>
       			);
       	},
 
 		updateName: function(event){
-			this.setState({name: event.target.value});
+			// this.setState({name: event.target.value});
+      this.setState({name: updateMail(event.target.value.length)});
 		}
 
       });
     
-    React.render(<Cat />, document.getElementById('cat'));
+    ReactDOM.render(<Cat />, document.getElementById('cat'));
 
     </script>
   </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
