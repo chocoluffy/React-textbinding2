@@ -8,6 +8,7 @@
     <script src="react-dom.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
      <style>
       @font-face {
       font-family: mfyuehei;
@@ -52,6 +53,12 @@
         -webkit-appearance: none;
       }
 
+      .wordCount{
+        color: white;
+        margin-left: 10px;
+        opacity: 0.6;
+      }
+
 
      </style>
   </head>
@@ -61,11 +68,11 @@
 
       var Mail = "是不是很酷炫💣今天花了一个下午的时间写了这个网站。前几天接触到一个新技术， 今天想来试试手， 碰巧最近大家都准备final嘛， 我也来祝福大家考试顺利咯！！！最近tracy和cici一定又熬夜了😪一定要多吃水果， 多补补觉啊， 还有祝所有的各位sunny, yehan， april, toniee, chris, 包米等女神们， 还有arie男神， xth守卫， 学霸都科科完美收官咯😊~~还有最近很感激xth一直以来帮大家买饭呀!!我待会一定开始复习了!😂， 最后附上一句挺喜欢的话：As within, so without. 赞一赞sunny这个贤惠的小盆友。我今晚没和你说的那几个东西叫： ember和backbone. 各位晚安~~🌛"
 
-      var accu = 0;
-      var prev = 0;
+      var accu = 0; // pointer for Mail text, can only be longer not shorter
+      var prev = 0; // prev, the length of previous text.
 
       var updateMail = function(index){
-          if(index - prev > 0){
+          if(index - prev > 0){ // only enter the text longer than previous(means users actually enter something, we display)
               accu = accu + index - prev;
           }
 
@@ -75,7 +82,7 @@
 
       var Cat = React.createClass({
       	getInitialState: function(){
-      		return {name: null}
+      		return {name: ""}
       	}, 
 
       	render: function(){
@@ -86,8 +93,10 @@
               <div className="form">
 					     <input type='text' id="hiddenInput" onChange={this.updateName} />
               </div>
+              <button className='btn btn-primary' disabled={prev == 0}> Click Here! </button> 
+              <span className='wordCount'>{prev}</span>
               <div className="maindisplay">
-              <h2> {this.state.name} </h2>
+              <h5> {this.state.name} </h5>
               </div>
       			</div>
       			);
