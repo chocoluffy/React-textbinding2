@@ -82,7 +82,9 @@
 
       var Cat = React.createClass({
       	getInitialState: function(){
-      		return {name: ""}
+      		return {
+            name: "", 
+            buttonClicked: false};
       	}, 
 
       	render: function(){
@@ -90,10 +92,11 @@
       			<div className="maincontent">
               <h1><i className="fa fa-quote-left"></i>在一个小小的角落:</h1>
       				<p>	你想对我说 </p>
+              <div className="alert alert-warning"></div>
               <div className="form">
 					     <input type='text' id="hiddenInput" onChange={this.updateName} />
               </div>
-              <button className='btn btn-primary' disabled={prev == 0}> Click Here! </button> 
+              <button className='btn btn-primary' disabled={prev == 0} onClick={this.toggleButton}> {this.state.buttonClicked ? "(๑>◡<๑) Clicked" : "(¬､¬) Click Here!"} </button> 
               <span className='wordCount'>{prev}</span>
               <div className="maindisplay">
               <h5> {this.state.name} </h5>
@@ -105,7 +108,11 @@
 		updateName: function(event){
 			// this.setState({name: event.target.value});
       this.setState({name: updateMail(event.target.value.length)});
-		}
+		},
+
+    toggleButton: function(event){
+      this.setState({buttonClicked: !this.state.buttonClicked});
+    }
 
       });
     
