@@ -84,7 +84,9 @@
       	getInitialState: function(){
       		return {
             name: "", 
-            buttonClicked: false};
+            buttonClicked: false,
+            inputText: ""
+          };
       	}, 
 
       	render: function(){
@@ -92,7 +94,7 @@
       			<div className="maincontent">
               <h1><i className="fa fa-quote-left"></i>在一个小小的角落:</h1>
       				<p>	你想对我说 </p>
-              <div className="alert alert-warning"></div>
+              {this.sensitiveText() }
               <div className="form">
 					     <input type='text' id="hiddenInput" onChange={this.updateName} />
               </div>
@@ -107,12 +109,26 @@
 
 		updateName: function(event){
 			// this.setState({name: event.target.value});
-      this.setState({name: updateMail(event.target.value.length)});
+      this.setState({
+        name: updateMail(event.target.value.length),
+        inputText: event.target.value
+      });
 		},
 
     toggleButton: function(event){
       this.setState({buttonClicked: !this.state.buttonClicked});
+    },
+
+    sensitiveText: function(){
+      if(!this.state.inputText.indexOf("yushunzhe")){
+        return (
+        <div className="alert alert-warning">sensitive info included!</div>
+        );
+      }else{
+        return ""
+      }
     }
+
 
       });
     
