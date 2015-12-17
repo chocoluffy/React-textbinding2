@@ -173,7 +173,7 @@ which means that we should return a single components(can have other elements ne
 instead of adding event handlers directly on DOM node, react attaches only one event listener on the root of document.
 
 
-12.14 d3js with React
+#12.14 d3js with React#
 ## recap on React: ##
  React acknowledges that client-side applications are really a collection of UI components that should react to events like user interaction.
 
