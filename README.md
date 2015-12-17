@@ -173,6 +173,67 @@ which means that we should return a single components(can have other elements ne
 instead of adding event handlers directly on DOM node, react attaches only one event listener on the root of document.
 
 
+12.14 d3js with React
+## recap on React: ##
+ React acknowledges that client-side applications are really a collection of UI components that should react to events like user interaction.
+
+React encourages building applications out of self-contained, reusable components that only care about a small piece of the UI. Many other frameworks attempt to do this such as Angular. React is different in that it enforces uni-directional data flow from parent component to child component. This makes debugging much easier.
+## why use React with d3? ##
+D3 is great at data visualizations, but it manipulates the DOM directly to display that data. Rendering DOM elements is where React shines. It uses a virtual representation of the DOM (virtual DOM) and uses a super performant diffing algorithm to determine the fastest way to update the DOM.
+
+## How to use them? ##
+Getting them to work together takes a bit of work but the strategy is fairly simple: since SVG lives in the DOM, let React handle displaying SVG representations of the data, while letting D3 handle all the math required to render the data.
+
+## About JSX: ##
+React sees HTML and client-side JavaScript as fundamentally bonded together. They're both concerned about one thing: rendering UI components to the user. They simply cannot be seperated without losing the ability to see what your component is going at a glance. The beauty of this approach is that you can describe exactly what your component will look like when it's rendered.
+
+Now let's move on and mount our component to the DOM.
+mount: /镶嵌， 指把create的component嵌入到dom里面/。
+
+1. why require CSS file.
+That's just a good practice just in case you want to do other things on the page other than render a React component.
+
+2. about the code
+setState explicitly tells React that we're changing some kind of state, triggering a re-render of the component and it's children. This essentially turns out UI components into state machines.
+
+We're passing in our data which lives in the App component's state to the ScatterPlot as a property or prop, along with the settings object. ...settings is a convenient JSX and ES2015 spread operator that spread attributes of an array or object, instead of doing all of that explicitly. For more information check out: JSX Spread Attributes.
+
+3. using d3.scale to do the math:
+Let's talk about D3 scales. This is where D3 shines. Scales take care of doing all the messy math converting your data into a format that can be displayed on a chart. If you have a data point value 189281 but your chart is only 200 pixels wide, D3 scales will convert that number to a number you can use to plot that point.
+
+4. when dealing with a lot of sibling elements:
+In this component, we're rendering a g element, which is like the SVG equivalent to a div. Since we want to render a point for every set of X-Y coordinates, we're going to render multiple sibling elements, so we're wrapping it all in a g element for React to work. Inside of g, we're mapping over the data and rendering a circle for each one using renderCircles. renderCircles creates an SVG circle element which takes a number of properties. Here's we're setting the x and y coordinates (cx and cy respectively) with the D3 scales passed in from the ScatterPlot component. r is the radius of our circle, and key is something React requires us to do. Since we're rendering identical sibling components, React's diffing algorithm needs some kind of way to keep track of them as it updates the DOM over and over. I'm using node-uuid because it's an easy way to create a unique key for each element. You can use anything you like, as long as it's unique.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
